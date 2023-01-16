@@ -3,7 +3,7 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/cosmos/ibc-go/v5/modules/core/exported"
+	"github.com/cosmos/ibc-go/v4/modules/core/exported"
 	icqtypes "github.com/strangelove-ventures/async-icq/types"
 )
 

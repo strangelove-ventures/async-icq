@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	channeltypes "github.com/cosmos/ibc-go/v5/modules/core/04-channel/types"
-	ibctesting "github.com/cosmos/ibc-go/v5/testing"
+	channeltypes "github.com/cosmos/ibc-go/v4/modules/core/04-channel/types"
+	ibctesting "github.com/cosmos/ibc-go/v4/testing"
 	"github.com/strangelove-ventures/async-icq/testing/simapp"
 	"github.com/strangelove-ventures/async-icq/types"
 )
@@ -21,16 +21,14 @@ type KeeperTestSuite struct {
 	// testing chains used for convenience and readability
 	chainA *ibctesting.TestChain
 	chainB *ibctesting.TestChain
-	chainC *ibctesting.TestChain
 }
 
 func (suite *KeeperTestSuite) SetupTest() {
 	ibctesting.DefaultTestingAppInit = simapp.SetupTestingApp
 
-	suite.coordinator = ibctesting.NewCoordinator(suite.T(), 3)
+	suite.coordinator = ibctesting.NewCoordinator(suite.T(), 2)
 	suite.chainA = suite.coordinator.GetChain(ibctesting.GetChainID(1))
 	suite.chainB = suite.coordinator.GetChain(ibctesting.GetChainID(2))
-	suite.chainC = suite.coordinator.GetChain(ibctesting.GetChainID(3))
 }
 
 func NewICQPath(chainA, chainB *ibctesting.TestChain) *ibctesting.Path {

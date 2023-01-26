@@ -15,7 +15,7 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	porttypes "github.com/cosmos/ibc-go/v5/modules/core/05-port/types"
+	porttypes "github.com/cosmos/ibc-go/v6/modules/core/05-port/types"
 	"github.com/strangelove-ventures/async-icq/keeper"
 	"github.com/strangelove-ventures/async-icq/types"
 )

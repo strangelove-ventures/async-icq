@@ -21,11 +21,11 @@ In short, ICA is cross chain writes while ICQ is cross chain reads.
 
 ### Definitions 
 
-- `Host Chain`: The chain where the query is sent. The host chain listens for IBC packets from a controller chain that contain instructions (e.g. cosmos SDK messages) that the interchain account will execute.
-- `Querier Chain`: The chain sending the query to the host chain. The controller chain sends IBC packets to the host chain to query information.
+- `Host Chain`: The chain where the query is sent. The host chain listens for IBC packets from a querying chain that contain instructions (e.g. cosmos SDK messages) that the interchain account will execute.
+- `Querier Chain`: The chain sending the query to the host chain. The querying chain sends IBC packets to the host chain to query information.
 - `Interchain Query`: An IBC packet that contains information about the query in the form of ABCI RequestQuery
 
-The chain which sends the query becomes the controller chain, and the chain which receives the query and responds becomes the host chain for the scenario.
+The chain which sends the query becomes the querying chain, and the chain which receives the query and responds becomes the host chain for the scenario.
 
 ### Desired properties
 
@@ -41,12 +41,10 @@ The chain which sends the query becomes the controller chain, and the chain whic
 
 ABCI RequestQuery enables blockchains to request information made by the end-users of applications. A query is received by a full node through its consensus engine and relayed to the application via the ABCI. It is then routed to the appropriate module via BaseApp's query router so that it can be processed by the module's query service
 
-ICQ can only return information from stale reads, for a read that requires consensus, ICA (ICS-27) will be used.
-
 
 #### **SendQuery**
 
-`SendQuery` is used to send an IBC packet containing query information to an interchain account on a host chain.
+`SendQuery` is used to send an IBC packet containing query information to an ICQ module on the host chain.
 
 ```go
 func (k Keeper) SendQuery(ctx sdk.Context, sourcePort, sourceChannel string, chanCap *capabilitytypes.Capability, 

@@ -10,8 +10,8 @@ import (
 	channeltypes "github.com/cosmos/ibc-go/v4/modules/core/04-channel/types"
 	host "github.com/cosmos/ibc-go/v4/modules/core/24-host"
 	ibcexported "github.com/cosmos/ibc-go/v4/modules/core/exported"
-	"github.com/strangelove-ventures/async-icq/keeper"
-	"github.com/strangelove-ventures/async-icq/types"
+	"github.com/strangelove-ventures/async-icq/v4/keeper"
+	"github.com/strangelove-ventures/async-icq/v4/types"
 )
 
 // IBCModule implements the ICS26 interface for interchain query host chains

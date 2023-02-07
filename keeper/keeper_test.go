@@ -7,8 +7,8 @@ import (
 
 	channeltypes "github.com/cosmos/ibc-go/v5/modules/core/04-channel/types"
 	ibctesting "github.com/cosmos/ibc-go/v5/testing"
-	"github.com/strangelove-ventures/async-icq/testing/simapp"
-	"github.com/strangelove-ventures/async-icq/types"
+	"github.com/strangelove-ventures/async-icq/v5/testing/simapp"
+	"github.com/strangelove-ventures/async-icq/v5/types"
 )
 
 var TestPort = "icq-test"

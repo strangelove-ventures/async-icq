@@ -16,8 +16,8 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 
 	porttypes "github.com/cosmos/ibc-go/v6/modules/core/05-port/types"
-	"github.com/strangelove-ventures/async-icq/keeper"
-	"github.com/strangelove-ventures/async-icq/types"
+	"github.com/strangelove-ventures/async-icq/v6/keeper"
+	"github.com/strangelove-ventures/async-icq/v6/types"
 )
 
 var (

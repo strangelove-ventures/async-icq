@@ -1,8 +1,8 @@
 package keeper_test
 
 import (
-	"github.com/strangelove-ventures/async-icq/testing/simapp"
-	"github.com/strangelove-ventures/async-icq/types"
+	"github.com/strangelove-ventures/async-icq/v6/testing/simapp"
+	"github.com/strangelove-ventures/async-icq/v6/types"
 )
 
 func (suite *KeeperTestSuite) TestParams() {

@@ -12,7 +12,7 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 
 	host "github.com/cosmos/ibc-go/v6/modules/core/24-host"
-	"github.com/strangelove-ventures/async-icq/types"
+	"github.com/strangelove-ventures/async-icq/v6/types"
 )
 
 // Keeper defines the IBC interchain query host keeper

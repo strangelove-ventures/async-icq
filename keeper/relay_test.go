@@ -9,8 +9,8 @@ import (
 	clienttypes "github.com/cosmos/ibc-go/v6/modules/core/02-client/types"
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 	ibctesting "github.com/cosmos/ibc-go/v6/testing"
-	"github.com/strangelove-ventures/async-icq/testing/simapp"
-	"github.com/strangelove-ventures/async-icq/types"
+	"github.com/strangelove-ventures/async-icq/v6/testing/simapp"
+	"github.com/strangelove-ventures/async-icq/v6/types"
 )
 
 func (suite *KeeperTestSuite) TestOnRecvPacket() {

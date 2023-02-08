@@ -101,9 +101,9 @@ import (
 	ibcmock "github.com/cosmos/ibc-go/v6/testing/mock"
 	simappparams "github.com/cosmos/ibc-go/v6/testing/simapp/params"
 	ibctestingtypes "github.com/cosmos/ibc-go/v6/testing/types"
-	icq "github.com/strangelove-ventures/async-icq"
-	icqkeeper "github.com/strangelove-ventures/async-icq/keeper"
-	icqtypes "github.com/strangelove-ventures/async-icq/types"
+	icq "github.com/strangelove-ventures/async-icq/v6"
+	icqkeeper "github.com/strangelove-ventures/async-icq/v6/keeper"
+	icqtypes "github.com/strangelove-ventures/async-icq/v6/types"
 )
 
 const appName = "SimApp"

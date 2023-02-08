@@ -1,6 +1,6 @@
 package types_test
 
-import "github.com/strangelove-ventures/async-icq/types"
+import "github.com/strangelove-ventures/async-icq/v6/types"
 
 func (suite *TypesTestSuite) TestContainsQueryPath() {
 	allowQueries := []string{

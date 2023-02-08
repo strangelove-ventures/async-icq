@@ -30,7 +30,7 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/cosmos/cosmos-sdk/x/auth/vesting"
 	vestingtypes "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
-	authz "github.com/cosmos/cosmos-sdk/x/authz"
+	"github.com/cosmos/cosmos-sdk/x/authz"
 	authzkeeper "github.com/cosmos/cosmos-sdk/x/authz/keeper"
 	authzmodule "github.com/cosmos/cosmos-sdk/x/authz/module"
 	"github.com/cosmos/cosmos-sdk/x/bank"
@@ -101,9 +101,9 @@ import (
 	ibcmock "github.com/cosmos/ibc-go/v5/testing/mock"
 	simappparams "github.com/cosmos/ibc-go/v5/testing/simapp/params"
 	ibctestingtypes "github.com/cosmos/ibc-go/v5/testing/types"
-	icq "github.com/strangelove-ventures/async-icq"
-	icqkeeper "github.com/strangelove-ventures/async-icq/keeper"
-	icqtypes "github.com/strangelove-ventures/async-icq/types"
+	icq "github.com/strangelove-ventures/async-icq/v5"
+	icqkeeper "github.com/strangelove-ventures/async-icq/v5/keeper"
+	icqtypes "github.com/strangelove-ventures/async-icq/v5/types"
 )
 
 const appName = "SimApp"

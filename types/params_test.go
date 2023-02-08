@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/strangelove-ventures/async-icq/types"
+	"github.com/strangelove-ventures/async-icq/v4/types"
 )
 
 func TestValidateParams(t *testing.T) {

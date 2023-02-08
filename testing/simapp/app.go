@@ -92,11 +92,11 @@ import (
 	ibctesting "github.com/cosmos/ibc-go/v4/testing"
 	ibcmock "github.com/cosmos/ibc-go/v4/testing/mock"
 	simappparams "github.com/cosmos/ibc-go/v4/testing/simapp/params"
-	icq "github.com/strangelove-ventures/async-icq"
-	icqkeeper "github.com/strangelove-ventures/async-icq/keeper"
-	icqtypes "github.com/strangelove-ventures/async-icq/types"
+	icq "github.com/strangelove-ventures/async-icq/v4"
+	icqkeeper "github.com/strangelove-ventures/async-icq/v4/keeper"
+	icqtypes "github.com/strangelove-ventures/async-icq/v4/types"
 
-	authz "github.com/cosmos/cosmos-sdk/x/authz"
+	"github.com/cosmos/cosmos-sdk/x/authz"
 	authzkeeper "github.com/cosmos/cosmos-sdk/x/authz/keeper"
 	authzmodule "github.com/cosmos/cosmos-sdk/x/authz/module"
 

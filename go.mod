@@ -1,4 +1,4 @@
-module github.com/strangelove-ventures/async-icq
+module github.com/strangelove-ventures/async-icq/v4
 
 go 1.18
 

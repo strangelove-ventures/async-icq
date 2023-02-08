@@ -3,8 +3,8 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/strangelove-ventures/async-icq/testing/simapp"
-	"github.com/strangelove-ventures/async-icq/types"
+	"github.com/strangelove-ventures/async-icq/v4/testing/simapp"
+	"github.com/strangelove-ventures/async-icq/v4/types"
 )
 
 func (suite *KeeperTestSuite) TestQueryParams() {

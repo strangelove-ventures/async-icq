@@ -19,6 +19,8 @@ import (
 	tmstate "github.com/tendermint/tendermint/state"
 )
 
+const version = "version"
+
 var (
 	// TestVersion defines a reusable icq version string for testing purposes
 	TestVersion = "icq-1"
@@ -195,7 +197,7 @@ func (suite *InterchainQueriesTestSuite) TestOnChanOpenTry() {
 		},
 		{
 			"invalid counterparty version", func() {
-				counterpartyVersion = "version"
+				counterpartyVersion = version
 			}, false,
 		},
 	}
@@ -259,7 +261,7 @@ func (suite *InterchainQueriesTestSuite) TestOnChanOpenAck() {
 		},
 		{
 			"invalid counterparty version", func() {
-				counterpartyVersion = "version"
+				counterpartyVersion = version
 			}, false,
 		},
 	}
@@ -440,7 +442,7 @@ func (suite *InterchainQueriesTestSuite) TestABCICodeDeterminism() {
 	}
 
 	differentTxResponse, err := proto.Marshal(&sdk.TxMsgData{
-		Data: []*sdk.MsgData{differentMsgData},
+		Data: []*sdk.MsgData{differentMsgData}, //nolint:staticcheck
 	})
 	suite.Require().NoError(err)
 

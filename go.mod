@@ -143,7 +143,6 @@ require (
 )
 
 replace (
-
 	github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
 	// informal tendermint with p2p patch
 	github.com/tendermint/tendermint => github.com/informalsystems/tendermint v0.34.26

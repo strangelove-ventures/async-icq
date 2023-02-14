@@ -28,8 +28,16 @@ linters:
     - unparam
     - unused
 
+# TODO: fix sdkerrors.Register / sdkerrors.Wrap /  wrapf
+
 issues:
   exclude-rules:
+    - text: "sdkerrors.Register"
+      linters:
+        - staticcheck
+    - text: "sdkerrors.Wrap"
+      linters:
+        - staticcheck
     - text: "Use of weak random number generator"
       linters:
         - gosec

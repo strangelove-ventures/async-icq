@@ -19,6 +19,8 @@ import (
 	tmstate "github.com/tendermint/tendermint/state"
 )
 
+const version = "version"
+
 var (
 	// TestVersion defines a reusable icq version string for testing purposes
 	TestVersion = "icq-1"
@@ -195,7 +197,7 @@ func (suite *InterchainQueriesTestSuite) TestOnChanOpenTry() {
 		},
 		{
 			"invalid counterparty version", func() {
-				counterpartyVersion = "version"
+				counterpartyVersion = version
 			}, false,
 		},
 	}
@@ -259,7 +261,7 @@ func (suite *InterchainQueriesTestSuite) TestOnChanOpenAck() {
 		},
 		{
 			"invalid counterparty version", func() {
-				counterpartyVersion = "version"
+				counterpartyVersion = version
 			}, false,
 		},
 	}
@@ -412,13 +414,13 @@ func (suite *InterchainQueriesTestSuite) TestABCICodeDeterminism() {
 	msgResponseBz, err := proto.Marshal(&channeltypes.MsgChannelOpenInitResponse{})
 	suite.Require().NoError(err)
 
-	msgData := &sdk.MsgData{
+	msgData := &sdk.MsgData{ //nolint:staticcheck
 		MsgType: sdk.MsgTypeURL(&channeltypes.MsgChannelOpenInit{}),
 		Data:    msgResponseBz,
 	}
 
 	txResponse, err := proto.Marshal(&sdk.TxMsgData{
-		Data: []*sdk.MsgData{msgData},
+		Data: []*sdk.MsgData{msgData}, //nolint:staticcheck
 	})
 	suite.Require().NoError(err)
 
@@ -434,13 +436,13 @@ func (suite *InterchainQueriesTestSuite) TestABCICodeDeterminism() {
 	differentMsgResponseBz, err := proto.Marshal(&channeltypes.MsgRecvPacketResponse{})
 	suite.Require().NoError(err)
 
-	differentMsgData := &sdk.MsgData{
+	differentMsgData := &sdk.MsgData{ //nolint:staticcheck
 		MsgType: sdk.MsgTypeURL(&channeltypes.MsgRecvPacket{}),
 		Data:    differentMsgResponseBz,
 	}
 
 	differentTxResponse, err := proto.Marshal(&sdk.TxMsgData{
-		Data: []*sdk.MsgData{differentMsgData},
+		Data: []*sdk.MsgData{differentMsgData}, //nolint:staticcheck
 	})
 	suite.Require().NoError(err)
 

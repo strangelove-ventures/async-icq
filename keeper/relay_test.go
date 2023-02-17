@@ -6,11 +6,11 @@ import (
 
 	abcitypes "github.com/tendermint/tendermint/abci/types"
 
-	clienttypes "github.com/cosmos/ibc-go/v6/modules/core/02-client/types"
-	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
-	ibctesting "github.com/cosmos/ibc-go/v6/testing"
-	"github.com/strangelove-ventures/async-icq/v6/testing/simapp"
-	"github.com/strangelove-ventures/async-icq/v6/types"
+	clienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
+	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
+	ibctesting "github.com/cosmos/ibc-go/v7/testing"
+	"github.com/strangelove-ventures/async-icq/v7/testing/simapp"
+	"github.com/strangelove-ventures/async-icq/v7/types"
 )
 
 func (suite *KeeperTestSuite) TestOnRecvPacket() {

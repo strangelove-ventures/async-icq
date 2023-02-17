@@ -3,7 +3,7 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/strangelove-ventures/async-icq/v6/types"
+	"github.com/strangelove-ventures/async-icq/v7/types"
 )
 
 // IsHostEnabled retrieves the host enabled boolean from the paramstore.

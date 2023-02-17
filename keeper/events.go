@@ -3,8 +3,8 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/cosmos/ibc-go/v6/modules/core/exported"
-	icqtypes "github.com/strangelove-ventures/async-icq/v6/types"
+	"github.com/cosmos/ibc-go/v7/modules/core/exported"
+	icqtypes "github.com/strangelove-ventures/async-icq/v7/types"
 )
 
 // EmitWriteErrorAcknowledgementEvent emits an event signalling an error acknowledgement and including the error details

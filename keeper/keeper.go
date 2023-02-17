@@ -10,6 +10,7 @@ import (
 	capabilitykeeper "github.com/cosmos/cosmos-sdk/x/capability/keeper"
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
+	ibcexported "github.com/cosmos/ibc-go/v7/modules/core/exported"
 
 	host "github.com/cosmos/ibc-go/v7/modules/core/24-host"
 	"github.com/strangelove-ventures/async-icq/v7/types"
@@ -55,7 +56,7 @@ func NewKeeper(
 
 // Logger returns the application logger, scoped to the associated module
 func (k Keeper) Logger(ctx sdk.Context) log.Logger {
-	return ctx.Logger().With("module", fmt.Sprintf("x/%s-%s", host.SubModuleName, types.ModuleName))
+	return ctx.Logger().With("module", fmt.Sprintf("x/%s-%s", ibcexported.ModuleName, types.ModuleName))
 }
 
 // BindPort stores the provided portID and binds to it, returning the associated capability

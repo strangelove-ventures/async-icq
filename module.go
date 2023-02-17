@@ -106,13 +106,7 @@ func (am AppModule) InitModule(ctx sdk.Context, params types.Params) {
 }
 
 // RegisterInvariants implements the AppModule interface
-func (AppModule) RegisterInvariants(ir sdk.InvariantRegistry) {
-}
-
-// Route implements the AppModule interface
-func (AppModule) Route() sdk.Route {
-	return sdk.NewRoute(types.RouterKey, nil)
-}
+func (AppModule) RegisterInvariants(ir sdk.InvariantRegistry) {}
 
 // NewHandler implements the AppModule interface
 func (AppModule) NewHandler() sdk.Handler {
@@ -122,11 +116,6 @@ func (AppModule) NewHandler() sdk.Handler {
 // QuerierRoute implements the AppModule interface
 func (AppModule) QuerierRoute() string {
 	return types.QuerierRoute
-}
-
-// LegacyQuerierHandler implements the AppModule interface
-func (am AppModule) LegacyQuerierHandler(legacyQuerierCdc *codec.LegacyAmino) sdk.Querier {
-	return nil
 }
 
 // RegisterServices registers module services

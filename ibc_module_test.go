@@ -8,6 +8,10 @@ import (
 	tmstate "github.com/cometbft/cometbft/state"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
+<<<<<<< HEAD
+=======
+	"github.com/cosmos/gogoproto/proto"
+>>>>>>> a626cb2 (refactor: migrate to ibc-go v7 and sdk 0.47.0)
 	clienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
 	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
 	host "github.com/cosmos/ibc-go/v7/modules/core/24-host"

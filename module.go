@@ -15,9 +15,9 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	porttypes "github.com/cosmos/ibc-go/v6/modules/core/05-port/types"
-	"github.com/strangelove-ventures/async-icq/v6/keeper"
-	"github.com/strangelove-ventures/async-icq/v6/types"
+	porttypes "github.com/cosmos/ibc-go/v7/modules/core/05-port/types"
+	"github.com/strangelove-ventures/async-icq/v7/keeper"
+	"github.com/strangelove-ventures/async-icq/v7/types"
 )
 
 var (
@@ -106,13 +106,7 @@ func (am AppModule) InitModule(ctx sdk.Context, params types.Params) {
 }
 
 // RegisterInvariants implements the AppModule interface
-func (AppModule) RegisterInvariants(ir sdk.InvariantRegistry) {
-}
-
-// Route implements the AppModule interface
-func (AppModule) Route() sdk.Route {
-	return sdk.NewRoute(types.RouterKey, nil)
-}
+func (AppModule) RegisterInvariants(ir sdk.InvariantRegistry) {}
 
 // NewHandler implements the AppModule interface
 func (AppModule) NewHandler() sdk.Handler {
@@ -122,11 +116,6 @@ func (AppModule) NewHandler() sdk.Handler {
 // QuerierRoute implements the AppModule interface
 func (AppModule) QuerierRoute() string {
 	return types.QuerierRoute
-}
-
-// LegacyQuerierHandler implements the AppModule interface
-func (am AppModule) LegacyQuerierHandler(legacyQuerierCdc *codec.LegacyAmino) sdk.Querier {
-	return nil
 }
 
 // RegisterServices registers module services

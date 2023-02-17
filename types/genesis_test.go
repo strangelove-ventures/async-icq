@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	ibctesting "github.com/cosmos/ibc-go/v6/testing"
-	"github.com/strangelove-ventures/async-icq/v6/types"
+	ibctesting "github.com/cosmos/ibc-go/v7/testing"
+	"github.com/strangelove-ventures/async-icq/v7/types"
 )
 
 type TypesTestSuite struct {

@@ -5,7 +5,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/strangelove-ventures/async-icq/v6/types"
+	"github.com/strangelove-ventures/async-icq/v7/types"
 )
 
 var _ types.QueryServer = Keeper{}

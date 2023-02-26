@@ -1,15 +1,15 @@
 run:
   tests: true
-  skip-dirs:
-    - tests/e2e
+  # timeout for analysis, e.g. 30s, 5m, default is 1m
+  timeout: 5m
 
 linters:
   disable-all: true
   enable:
-    - bodyclose
     - depguard
     - dogsled
     - errcheck
+    - exportloopref
     - goconst
     - gocritic
     - gofumpt
@@ -19,28 +19,50 @@ linters:
     - ineffassign
     - misspell
     - nakedret
+    - nolintlint
+    - revive
     - staticcheck
     - stylecheck
     - typecheck
     - unconvert
-    - unused
     - unparam
-    - nolintlint
+    - unused
+
+# TODO: fix the sdkerrors.Wrap deprecation warning and re-enable staticcheck
+# TODO: fix the use of deprecated gov style
 
 issues:
   exclude-rules:
+    - text: "SA1019: sdkerrors.Register"
+      linters:
+        - staticcheck
+    - text: "sdkerrors.ABCIInfo is deprecated"
+      linters:
+        - staticcheck
+    - text: "sdkerrors.IsOf is deprecated"
+      linters:
+        - staticcheck
+    - text: "Use WeightedProposalMsg instead"
+      linters:
+        - staticcheck
+    - text: "Use MsgSimulatorFn instead"
+      linters:
+        - staticcheck
+    - text: "Error return value of `flagSet.Set` is not checked"
+      linters:
+        - errcheck
+    - text: "SA1019: sdkerrors.Wrapf is deprecated: functionality of this package has been moved to it's own module"
+      linters:
+        - staticcheck
+    - text: "sdkerrors.Error is deprecated: the type has been moved to cosmossdk.io/errors module"
+      linters:
+        - staticcheck
+    - text: "sdkerrors.Wrap is deprecated"
+      linters:
+        - staticcheck
     - text: "Use of weak random number generator"
       linters:
         - gosec
-    - text: "comment on exported var"
-      linters:
-        - golint
-    - text: "don't use an underscore in package name"
-      linters:
-        - golint
-    - text: "put a space between `//` and comment text"
-      linters:
-        - gocritic
     - text: "ST1003:"
       linters:
         - stylecheck
@@ -49,9 +71,11 @@ issues:
     - text: "ST1016:"
       linters:
         - stylecheck
-    - text: "SA1019: codec.LegacyAmino is deprecated"
+    - path: "migrations"
+      text: "SA1019:"
       linters:
         - staticcheck
+
   max-issues-per-linter: 10000
   max-same-issues: 10000
 

@@ -5,15 +5,9 @@ package types
 
 import (
 	fmt "fmt"
-<<<<<<< HEAD
 	types "github.com/cometbft/cometbft/abci/types"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	proto "github.com/cosmos/gogoproto/proto"
-=======
-	_ "github.com/cosmos/gogoproto/gogoproto"
-	proto "github.com/cosmos/gogoproto/proto"
-	types "github.com/tendermint/tendermint/abci/types"
->>>>>>> a626cb2 (refactor: migrate to ibc-go v7 and sdk 0.47.0)
 	io "io"
 	math "math"
 	math_bits "math/bits"

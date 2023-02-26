@@ -5,9 +5,9 @@ package types
 
 import (
 	fmt "fmt"
+	types "github.com/cometbft/cometbft/abci/types"
+	_ "github.com/cosmos/gogoproto/gogoproto"
 	proto "github.com/cosmos/gogoproto/proto"
-	_ "github.com/gogo/protobuf/gogoproto"
-	types "github.com/tendermint/tendermint/abci/types"
 	io "io"
 	math "math"
 	math_bits "math/bits"

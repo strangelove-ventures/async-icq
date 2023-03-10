@@ -5,11 +5,11 @@ go 1.18
 require (
 	cosmossdk.io/api v0.3.1
 	cosmossdk.io/errors v1.0.0-beta.7
-	github.com/cometbft/cometbft v0.37.0-alpha.3.0.20230225120706-c676b8a53531
+	github.com/cometbft/cometbft v0.37.0
 	github.com/cometbft/cometbft-db v0.7.0
-	github.com/cosmos/cosmos-sdk v0.47.0-rc2.0.20230224204036-a6adb0821462
+	github.com/cosmos/cosmos-sdk v0.47.0-rc3
 	github.com/cosmos/gogoproto v1.4.6
-	github.com/cosmos/ibc-go/v7 v7.0.0-20230224085028-0a79e38d9199
+	github.com/cosmos/ibc-go/v7 v7.0.0-rc1
 	github.com/gogo/protobuf v1.3.2
 	github.com/golang/protobuf v1.5.2
 	github.com/gorilla/mux v1.8.0
@@ -17,7 +17,7 @@ require (
 	github.com/rakyll/statik v0.1.7
 	github.com/spf13/cast v1.5.0
 	github.com/spf13/cobra v1.6.1
-	github.com/stretchr/testify v1.8.1
+	github.com/stretchr/testify v1.8.2
 	google.golang.org/genproto v0.0.0-20230216225411-c8e22ba71e44
 	google.golang.org/grpc v1.53.0
 )

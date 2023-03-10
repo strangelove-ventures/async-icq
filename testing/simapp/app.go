@@ -842,7 +842,7 @@ func (ao EmptyAppOptions) Get(o string) interface{} {
 
 func GetSimApp(chain *ibctesting.TestChain) *SimApp {
 	app, ok := chain.App.(*SimApp)
-	require.True(chain.TB, ok)
+	require.True(chain.T, ok)
 
 	return app
 }

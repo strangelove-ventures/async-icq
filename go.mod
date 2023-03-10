@@ -1,6 +1,6 @@
 module github.com/strangelove-ventures/async-icq/v7
 
-go 1.18
+go 1.20
 
 require (
 	cosmossdk.io/api v0.3.1

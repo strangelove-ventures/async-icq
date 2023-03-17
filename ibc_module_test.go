@@ -3,20 +3,20 @@ package icq_test
 import (
 	"testing"
 
+	abcitypes "github.com/cometbft/cometbft/abci/types"
+	tmprotostate "github.com/cometbft/cometbft/proto/tendermint/state"
+	tmstate "github.com/cometbft/cometbft/state"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
-	clienttypes "github.com/cosmos/ibc-go/v6/modules/core/02-client/types"
-	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
-	host "github.com/cosmos/ibc-go/v6/modules/core/24-host"
-	ibctesting "github.com/cosmos/ibc-go/v6/testing"
-	"github.com/gogo/protobuf/proto"
-	icq "github.com/strangelove-ventures/async-icq/v6"
-	"github.com/strangelove-ventures/async-icq/v6/testing/simapp"
-	"github.com/strangelove-ventures/async-icq/v6/types"
+	"github.com/cosmos/gogoproto/proto"
+	clienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
+	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
+	host "github.com/cosmos/ibc-go/v7/modules/core/24-host"
+	ibctesting "github.com/cosmos/ibc-go/v7/testing"
+	icq "github.com/strangelove-ventures/async-icq/v7"
+	"github.com/strangelove-ventures/async-icq/v7/testing/simapp"
+	"github.com/strangelove-ventures/async-icq/v7/types"
 	"github.com/stretchr/testify/suite"
-	abcitypes "github.com/tendermint/tendermint/abci/types"
-	tmprotostate "github.com/tendermint/tendermint/proto/tendermint/state"
-	tmstate "github.com/tendermint/tendermint/state"
 )
 
 var (
@@ -26,6 +26,8 @@ var (
 	TestQueryPath = "/store/params/key"
 	TestQueryData = "icqhost/HostEnabled"
 )
+
+const version = "version"
 
 type InterchainQueriesTestSuite struct {
 	suite.Suite
@@ -115,7 +117,7 @@ func (suite *InterchainQueriesTestSuite) TestOnChanOpenInit() {
 		},
 		{
 			"invalid version", func() {
-				channel.Version = "version"
+				channel.Version = version
 			}, false,
 		},
 		{
@@ -195,7 +197,7 @@ func (suite *InterchainQueriesTestSuite) TestOnChanOpenTry() {
 		},
 		{
 			"invalid counterparty version", func() {
-				counterpartyVersion = "version"
+				counterpartyVersion = version
 			}, false,
 		},
 	}
@@ -259,7 +261,7 @@ func (suite *InterchainQueriesTestSuite) TestOnChanOpenAck() {
 		},
 		{
 			"invalid counterparty version", func() {
-				counterpartyVersion = "version"
+				counterpartyVersion = version
 			}, false,
 		},
 	}

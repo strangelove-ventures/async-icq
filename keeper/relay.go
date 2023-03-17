@@ -1,13 +1,14 @@
 package keeper
 
 import (
+	"cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	abci "github.com/tendermint/tendermint/abci/types"
+	abci "github.com/cometbft/cometbft/abci/types"
 
-	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
-	"github.com/strangelove-ventures/async-icq/v6/types"
+	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
+	"github.com/strangelove-ventures/async-icq/v7/types"
 )
 
 // OnRecvPacket handles a given interchain queries packet on a destination host chain.
@@ -17,7 +18,7 @@ func (k Keeper) OnRecvPacket(ctx sdk.Context, packet channeltypes.Packet) ([]byt
 
 	if err := types.ModuleCdc.UnmarshalJSON(packet.GetData(), &data); err != nil {
 		// UnmarshalJSON errors are indeterminate and therefore are not wrapped and included in failed acks
-		return nil, sdkerrors.Wrapf(types.ErrUnknownDataType, "cannot unmarshal ICQ packet data")
+		return nil, errors.Wrapf(types.ErrUnknownDataType, "cannot unmarshal ICQ packet data")
 	}
 
 	reqs, err := types.DeserializeCosmosQuery(data.GetData())
@@ -59,7 +60,7 @@ func (k Keeper) executeQuery(ctx sdk.Context, reqs []abci.RequestQuery) ([]byte,
 	}
 	data, err := types.ModuleCdc.MarshalJSON(&ack)
 	if err != nil {
-		return nil, sdkerrors.Wrap(err, "failed to marshal tx data")
+		return nil, errors.Wrap(err, "failed to marshal tx data")
 	}
 
 	return data, nil
@@ -69,13 +70,13 @@ func (k Keeper) executeQuery(ctx sdk.Context, reqs []abci.RequestQuery) ([]byte,
 func (k Keeper) authenticateQuery(ctx sdk.Context, q abci.RequestQuery) error {
 	allowQueries := k.GetAllowQueries(ctx)
 	if !types.ContainsQueryPath(allowQueries, q.Path) {
-		return sdkerrors.Wrapf(sdkerrors.ErrUnauthorized, "query path not allowed: %s", q.Path)
+		return errors.Wrapf(sdkerrors.ErrUnauthorized, "query path not allowed: %s", q.Path)
 	}
 	if !(q.Height == 0 || q.Height == ctx.BlockHeight()) {
-		return sdkerrors.Wrapf(sdkerrors.ErrUnauthorized, "query height not allowed: %d", q.Height)
+		return errors.Wrapf(sdkerrors.ErrUnauthorized, "query height not allowed: %d", q.Height)
 	}
 	if q.Prove {
-		return sdkerrors.Wrapf(sdkerrors.ErrUnauthorized, "query proof not allowed")
+		return errors.Wrapf(sdkerrors.ErrUnauthorized, "query proof not allowed")
 	}
 
 	return nil

@@ -59,11 +59,7 @@ func SetupICQPath(path *ibctesting.Path) error {
 		return err
 	}
 
-	if err := path.EndpointB.ChanOpenConfirm(); err != nil {
-		return err
-	}
-
-	return nil
+	return path.EndpointB.ChanOpenConfirm()
 }
 
 func TestKeeperTestSuite(t *testing.T) {

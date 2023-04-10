@@ -245,9 +245,7 @@ acknowledgement in `OnAcknowledgement`. It is here that developers should implem
 expected responses from the queries. 
 
 A successful acknowledgment will be sent back to the querier module as an `InterchainQueryPacketAck`. 
-The `Data` field should be deserialized to an array of ABCI ResponseQuery with the `DeserializeCosmosResponse` function. 
-Responses are sent in the same order as the requests due to the nature of `ORDERED` IBC channels.
-
+The `Data` field should be deserialized to an array of ABCI ResponseQuery with the `DeserializeCosmosResponse` function.
 
 ```go
 switch resp := ack.Response.(type) {

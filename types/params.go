@@ -42,12 +42,7 @@ func (p Params) Validate() error {
 	if err := validateEnabled(p.HostEnabled); err != nil {
 		return err
 	}
-
-	if err := validateAllowlist(p.AllowQueries); err != nil {
-		return err
-	}
-
-	return nil
+	return validateAllowlist(p.AllowQueries)
 }
 
 // ParamSetPairs implements params.ParamSet

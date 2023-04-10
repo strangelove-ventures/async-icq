@@ -25,10 +25,5 @@ func (gs GenesisState) Validate() error {
 	if err := host.PortIdentifierValidator(gs.HostPort); err != nil {
 		return err
 	}
-
-	if err := gs.Params.Validate(); err != nil {
-		return err
-	}
-
-	return nil
+	return gs.Params.Validate()
 }

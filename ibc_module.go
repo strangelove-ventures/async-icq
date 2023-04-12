@@ -3,8 +3,8 @@ package icq
 import (
 	"strings"
 
+	"cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
 
 	channeltypes "github.com/cosmos/ibc-go/v5/modules/core/04-channel/types"
@@ -30,11 +30,11 @@ func NewIBCModule(k keeper.Keeper) IBCModule {
 func (im IBCModule) OnChanOpenInit(
 	ctx sdk.Context,
 	order channeltypes.Order,
-	connectionHops []string,
+	_ []string,
 	portID string,
 	channelID string,
 	chanCap *capabilitytypes.Capability,
-	counterparty channeltypes.Counterparty,
+	_ channeltypes.Counterparty,
 	version string,
 ) (string, error) {
 	if !im.keeper.IsHostEnabled(ctx) {
@@ -50,7 +50,7 @@ func (im IBCModule) OnChanOpenInit(
 	}
 
 	if version != types.Version {
-		return "", sdkerrors.Wrapf(types.ErrInvalidVersion, "got %s, expected %s", version, types.Version)
+		return "", errors.Wrapf(types.ErrInvalidVersion, "got %s, expected %s", version, types.Version)
 	}
 
 	// Claim channel capability passed back by IBC module
@@ -66,15 +66,15 @@ func ValidateICQChannelParams(
 	keeper keeper.Keeper,
 	order channeltypes.Order,
 	portID string,
-	channelID string,
+	_ string,
 ) error {
 	if order != channeltypes.UNORDERED {
-		return sdkerrors.Wrapf(channeltypes.ErrInvalidChannelOrdering, "expected %s channel, got %s", channeltypes.UNORDERED, order)
+		return errors.Wrapf(channeltypes.ErrInvalidChannelOrdering, "expected %s channel, got %s", channeltypes.UNORDERED, order)
 	}
 
 	boundPort := keeper.GetPort(ctx)
 	if portID != boundPort {
-		return sdkerrors.Wrapf(types.ErrInvalidHostPort, "expected %s, got %s", boundPort, portID)
+		return errors.Wrapf(types.ErrInvalidHostPort, "expected %s, got %s", boundPort, portID)
 	}
 	return nil
 }
@@ -83,11 +83,11 @@ func ValidateICQChannelParams(
 func (im IBCModule) OnChanOpenTry(
 	ctx sdk.Context,
 	order channeltypes.Order,
-	connectionHops []string,
+	_ []string,
 	portID,
 	channelID string,
 	chanCap *capabilitytypes.Capability,
-	counterparty channeltypes.Counterparty,
+	_ channeltypes.Counterparty,
 	counterpartyVersion string,
 ) (string, error) {
 	if !im.keeper.IsHostEnabled(ctx) {
@@ -99,7 +99,7 @@ func (im IBCModule) OnChanOpenTry(
 	}
 
 	if counterpartyVersion != types.Version {
-		return "", sdkerrors.Wrapf(types.ErrInvalidVersion, "got %s, expected %s", counterpartyVersion, types.Version)
+		return "", errors.Wrapf(types.ErrInvalidVersion, "got %s, expected %s", counterpartyVersion, types.Version)
 	}
 
 	// Module may have already claimed capability in OnChanOpenInit in the case of crossing hellos
@@ -119,9 +119,9 @@ func (im IBCModule) OnChanOpenTry(
 // OnChanOpenAck implements the IBCModule interface
 func (im IBCModule) OnChanOpenAck(
 	ctx sdk.Context,
-	portID,
-	channelID string,
-	counterpartyChannelID string,
+	_ string,
+	_ string,
+	_ string,
 	counterpartyVersion string,
 ) error {
 	if !im.keeper.IsHostEnabled(ctx) {
@@ -129,7 +129,7 @@ func (im IBCModule) OnChanOpenAck(
 	}
 
 	if counterpartyVersion != types.Version {
-		return sdkerrors.Wrapf(types.ErrInvalidVersion, "got %s, expected %s", counterpartyVersion, types.Version)
+		return errors.Wrapf(types.ErrInvalidVersion, "got %s, expected %s", counterpartyVersion, types.Version)
 	}
 	return nil
 }
@@ -137,8 +137,8 @@ func (im IBCModule) OnChanOpenAck(
 // OnChanOpenAck implements the IBCModule interface
 func (im IBCModule) OnChanOpenConfirm(
 	ctx sdk.Context,
-	portID,
-	channelID string,
+	_ string,
+	_ string,
 ) error {
 	if !im.keeper.IsHostEnabled(ctx) {
 		return types.ErrHostDisabled
@@ -148,18 +148,18 @@ func (im IBCModule) OnChanOpenConfirm(
 
 // OnChanCloseInit implements the IBCModule interface
 func (im IBCModule) OnChanCloseInit(
-	ctx sdk.Context,
-	portID,
-	channelID string,
+	_ sdk.Context,
+	_ string,
+	_ string,
 ) error {
 	return nil
 }
 
 // OnChanCloseConfirm implements the IBCModule interface
 func (im IBCModule) OnChanCloseConfirm(
-	ctx sdk.Context,
-	portID,
-	channelID string,
+	_ sdk.Context,
+	_ string,
+	_ string,
 ) error {
 	return nil
 }
@@ -188,19 +188,19 @@ func (im IBCModule) OnRecvPacket(
 
 // OnAcknowledgementPacket implements the IBCModule interface
 func (im IBCModule) OnAcknowledgementPacket(
-	ctx sdk.Context,
-	packet channeltypes.Packet,
-	acknowledgement []byte,
-	relayer sdk.AccAddress,
+	_ sdk.Context,
+	_ channeltypes.Packet,
+	_ []byte,
+	_ sdk.AccAddress,
 ) error {
-	return sdkerrors.Wrap(types.ErrInvalidChannelFlow, "cannot receive acknowledgement on a host channel end, a host chain does not send a packet over the channel")
+	return errors.Wrap(types.ErrInvalidChannelFlow, "cannot receive acknowledgement on a host channel end, a host chain does not send a packet over the channel")
 }
 
 // OnTimeoutPacket implements the IBCModule interface
 func (im IBCModule) OnTimeoutPacket(
-	ctx sdk.Context,
-	packet channeltypes.Packet,
-	relayer sdk.AccAddress,
+	_ sdk.Context,
+	_ channeltypes.Packet,
+	_ sdk.AccAddress,
 ) error {
-	return sdkerrors.Wrap(types.ErrInvalidChannelFlow, "cannot cause a packet timeout on a host channel end, a host chain does not send a packet over the channel")
+	return errors.Wrap(types.ErrInvalidChannelFlow, "cannot cause a packet timeout on a host channel end, a host chain does not send a packet over the channel")
 }

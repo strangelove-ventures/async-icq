@@ -12,20 +12,22 @@ modified: 2022-08-30
 
 ## Synopsis
 
-This document serves as a guide for a better understanding of the implementation of interchain queries via ABCI Query
+This document serves as a guide for better understanding the interchain queries implementation that uses ABCI Queries.
 
 ### Motivation
 
-Interchain Queries enable blockchains to query the state of an account on another chain without the need for ICA auth. ICS-27 Interchain Accounts is used for IBC transactions, e.g. to transfer coins from one interchain account to another, whereas Interchain Queries is used for IBC Query, e.g. to query the balance of an account on another chain. 
+Interchain Queries enable blockchains to query the state of an account on another chain without the need for ICA auth. 
+ICS-27, Interchain Accounts, is used for IBC transactions, e.g. to transfer coins from one interchain account to another, 
+whereas Interchain Queries are used for IBC Queries, e.g. to query the balance of an account on another chain. 
 In short, ICA is cross chain writes while ICQ is cross chain reads.
 
 ### Definitions 
 
-- `Host Chain`: The chain where the query is sent. The host chain listens for IBC packets from a controller chain that contain instructions (e.g. cosmos SDK messages) that the interchain account will execute.
-- `Querier Chain`: The chain sending the query to the host chain. The controller chain sends IBC packets to the host chain to query information.
-- `Interchain Query`: An IBC packet that contains information about the query in the form of ABCI RequestQuery
+- `Host Chain`: The chain where the query is sent. The host chain listens for IBC packets from a controller chain which contain instructions describing an ABCI Query Request.
+- `Controller Chain`: The chain sending the query to the host chain. The controller chain sends IBC packets to the host chain to query information.
+- `Interchain Query`: An IBC packet that contains information about the query in the form of an ABCI RequestQuery.
 
-The chain which sends the query becomes the controller chain, and the chain which receives the query and responds becomes the host chain for the scenario.
+The chain which sends the query becomes the controller chain, and the chain which receives the query and responds becomes the host chain.
 
 ### Desired properties
 
@@ -39,7 +41,9 @@ The chain which sends the query becomes the controller chain, and the chain whic
 
 ### ABCI Query
 
-ABCI RequestQuery enables blockchains to request information made by the end-users of applications. A query is received by a full node through its consensus engine and relayed to the application via the ABCI. It is then routed to the appropriate module via BaseApp's query router so that it can be processed by the module's query service
+ABCI RequestQuery enables blockchains to request information made by the end-users of applications. 
+A query is received by a full node through its consensus engine and relayed to the application via the ABCI. 
+It is then routed to the appropriate module via BaseApp's query router so that it can be processed by the module's query service.
 
 ICQ can only return information from stale reads, for a read that requires consensus, ICA (ICS-27) will be used.
 
@@ -133,7 +137,7 @@ func (k Keeper) executeQuery(ctx sdk.Context, reqs []abci.RequestQuery) ([]byte,
 
 ### Packet Data
 
-`InterchainQueryPacketData` is comprised of raw query.
+`InterchainQueryPacketData` is comprised of a raw query.
 
 ```proto
 message InterchainQueryPacketData  {
@@ -141,7 +145,7 @@ message InterchainQueryPacketData  {
 }
 ```
 
-`InterchainQueryPacketAck` is comprised of an ABCI query response with non-deterministic fields left empty (e.g. Codespace, Log, Info and ...).
+`InterchainQueryPacketAck` is comprised of an ABCI query response with non-deterministic fields left empty (e.g. Codespace, Log, Info).
 
 ```proto
 message InterchainQueryPacketAck {
@@ -236,8 +240,12 @@ packet := channeltypes.NewPacket(
 
 ### Sample Acknowledgement Response
 
-Successful acknowledgment will be sent back to querier module as InterchainQueryPacketAck. The Data field should be deserialized to and array of ABCI ResponseQuery with DeserializeCosmosResponse function. Responses are sent in the same order as the requests.
+Acknowledgements are written to the host chain's state on a successful `OnRecvPacket` and then the controller chain verifies that 
+acknowledgement in `OnAcknowledgement`. It is here that developers should implement there custom handling logic for the various
+expected responses from the queries. 
 
+A successful acknowledgment will be sent back to the querier module as an `InterchainQueryPacketAck`. 
+The `Data` field should be deserialized to an array of ABCI ResponseQuery with the `DeserializeCosmosResponse` function.
 
 ```go
 switch resp := ack.Response.(type) {
@@ -268,7 +276,7 @@ switch resp := ack.Response.(type) {
 
 ## Other Implementations
 
-Another implementation of Interchain Queries is by the use of KV store which can be seen implemented here by [QuickSilver](https://github.com/ingenuity-build/quicksilver/tree/main/x/interchainquery)
+Another implementation of Interchain Queries is by the use of the KV store which can be seen implemented here by [QuickSilver](https://github.com/ingenuity-build/quicksilver/tree/main/x/interchainquery).
 
 The implementation works even if the host side hasn't implemented ICQ, however, it does not fully leverage the IBC standards. 
 

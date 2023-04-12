@@ -85,6 +85,10 @@ type AppModule struct {
 	keeper keeper.Keeper
 }
 
+func (am AppModule) Route() sdk.Route {
+	return sdk.NewRoute(types.RouterKey, nil)
+}
+
 // NewAppModule creates a new IBC interchain query module
 func NewAppModule(keeper keeper.Keeper) AppModule {
 	return AppModule{

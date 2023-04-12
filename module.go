@@ -108,6 +108,11 @@ func (am AppModule) InitModule(ctx sdk.Context, params types.Params) {
 // RegisterInvariants implements the AppModule interface
 func (AppModule) RegisterInvariants(_ sdk.InvariantRegistry) {}
 
+// Route implements the AppModule interface
+func (AppModule) Route() sdk.Route {
+	return sdk.NewRoute(types.RouterKey, nil)
+}
+
 // NewHandler implements the AppModule interface
 func (AppModule) NewHandler() sdk.Handler {
 	return nil

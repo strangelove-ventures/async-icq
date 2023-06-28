@@ -5,7 +5,7 @@ import (
 
 	"cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
+	capabilityibctypes "github.com/cosmos/ibc-go/modules/capability/types"
 
 	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
 	host "github.com/cosmos/ibc-go/v7/modules/core/24-host"
@@ -33,7 +33,7 @@ func (im IBCModule) OnChanOpenInit(
 	_ []string,
 	portID string,
 	channelID string,
-	chanCap *capabilitytypes.Capability,
+	chanCap *capabilityibctypes.Capability,
 	_ channeltypes.Counterparty,
 	version string,
 ) (string, error) {
@@ -86,7 +86,7 @@ func (im IBCModule) OnChanOpenTry(
 	_ []string,
 	portID,
 	channelID string,
-	chanCap *capabilitytypes.Capability,
+	chanCap *capabilityibctypes.Capability,
 	_ channeltypes.Counterparty,
 	counterpartyVersion string,
 ) (string, error) {

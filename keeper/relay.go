@@ -9,6 +9,7 @@ import (
 
 	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
 	"github.com/strangelove-ventures/async-icq/v7/types"
+	"github.com/strangelove-ventures/async-icq/v7/utils"
 )
 
 // OnRecvPacket handles a given interchain queries packet on a destination host chain.
@@ -26,7 +27,13 @@ func (k Keeper) OnRecvPacket(ctx sdk.Context, packet channeltypes.Packet) ([]byt
 		return nil, err
 	}
 
-	response, err := k.executeQuery(ctx, reqs)
+	// If we panic when executing a query that panics that should be returned as an
+	// error.
+	var response []byte
+	err = utils.ApplyFuncIfNoError(ctx, func(ctx sdk.Context) error {
+		response, err = k.executeQuery(ctx, reqs)
+		return err
+	})
 	if err != nil {
 		return nil, err
 	}

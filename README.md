@@ -174,7 +174,7 @@ func (k Keeper) OnRecvPacket(ctx sdk.Context, packet channeltypes.Packet) ([]byt
 
 	if err := types.ModuleCdc.UnmarshalJSON(packet.GetData(), &data); err != nil {
 		// UnmarshalJSON errors are indeterminate and therefore are not wrapped and included in failed acks
-		return nil, sdkerrors.Wrapf(types.ErrUnknownDataType, "cannot unmarshal ICQ packet data")
+		return nil, errors.Wrapf(types.ErrUnknownDataType, "cannot unmarshal ICQ packet data")
 	}
 
 	reqs, err := types.DeserializeCosmosQuery(data.GetData())
@@ -182,7 +182,13 @@ func (k Keeper) OnRecvPacket(ctx sdk.Context, packet channeltypes.Packet) ([]byt
 		return nil, err
 	}
 
-	response, err := k.executeQuery(ctx, reqs)
+	// If we panic when executing a query that panics that should be returned as an
+	// error.
+	var response []byte
+	err = utils.ApplyFuncIfNoError(ctx, func(ctx sdk.Context) error {
+		response, err = k.executeQuery(ctx, reqs)
+		return err
+	})
 	if err != nil {
 		return nil, err
 	}

@@ -10,6 +10,8 @@ created: 2022-06-22
 modified: 2022-08-30
 ---
 
+**THIS REPO HAS BEEN ARCHIVED, ALL NEW PRS AND ISSUE TRACKING WILL BE CONDUCTED IN THE UPSTREAM REPO --> <https://github.com/cosmos/ibc-apps>**
+
 ## Synopsis
 
 This document serves as a guide for better understanding the interchain queries implementation that uses ABCI Queries.
